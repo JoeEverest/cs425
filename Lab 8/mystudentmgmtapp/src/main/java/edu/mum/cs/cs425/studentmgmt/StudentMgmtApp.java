@@ -6,6 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import edu.mum.cs.cs425.studentmgmt.model.Classroom;
 import edu.mum.cs.cs425.studentmgmt.model.Student;
 import edu.mum.cs.cs425.studentmgmt.model.Transcript;
 import edu.mum.cs.cs425.studentmgmt.repository.StudentRepository;
@@ -40,10 +41,14 @@ public class StudentMgmtApp implements CommandLineRunner {
 		Transcript t1 = new Transcript(1L, "BS Computer Science");
 		s1.setTranscript(t1);
 
-		// Save the student; CascadeType.ALL saves the linked transcript too.
+		// Task 2.2: create the Classroom and link it to the Student (Many-to-One).
+		Classroom c1 = new Classroom(1L, "McLaughlin building", "M105");
+		s1.setClassroom(c1);
+
+		// Save the student; CascadeType.ALL saves the transcript and classroom too.
 		saveStudent(s1);
 
-		System.out.println("Saved student (with transcript) to the database:");
+		System.out.println("Saved student (with transcript and classroom) to the database:");
 		System.out.println("  " + s1);
 	}
 }

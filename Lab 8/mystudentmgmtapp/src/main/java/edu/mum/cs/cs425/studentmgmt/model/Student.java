@@ -7,6 +7,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -42,6 +43,10 @@ public class Student {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "transcript_id")
 	private Transcript transcript;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "classroom_id")
+	private Classroom classroom;
 
 	// Default (no-argument) constructor is required by JPA.
 	public Student() {
@@ -123,12 +128,20 @@ public class Student {
 		this.transcript = transcript;
 	}
 
+	public Classroom getClassroom() {
+		return classroom;
+	}
+
+	public void setClassroom(Classroom classroom) {
+		this.classroom = classroom;
+	}
+
 	@Override
 	public String toString() {
 		return String.format(
 				"Student{studentId=%d, studentNumber=%s, firstName=%s, middleName=%s, "
-						+ "lastName=%s, cgpa=%s, dateOfEnrollment=%s, transcript=%s}",
+						+ "lastName=%s, cgpa=%s, dateOfEnrollment=%s, transcript=%s, classroom=%s}",
 				studentId, studentNumber, firstName, middleName, lastName, cgpa,
-				dateOfEnrollment, transcript);
+				dateOfEnrollment, transcript, classroom);
 	}
 }
