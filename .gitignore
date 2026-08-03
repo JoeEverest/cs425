@@ -1,0 +1,11 @@
+# Compiled class files
+bin/
+*.class
+
+# Word temporary/lock files
+~$*
+
+# macOS
+.DS_Store
+
+*.docx
