@@ -2,9 +2,12 @@ package edu.mum.cs.cs425.studentmgmt.model;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -34,6 +37,11 @@ public class Student {
 
 	@Column(name = "date_of_enrollment")
 	private LocalDate dateOfEnrollment;
+
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "transcript_id")
+	private Transcript transcript;
 
 	// Default (no-argument) constructor is required by JPA.
 	public Student() {
@@ -107,12 +115,20 @@ public class Student {
 		this.dateOfEnrollment = dateOfEnrollment;
 	}
 
+	public Transcript getTranscript() {
+		return transcript;
+	}
+
+	public void setTranscript(Transcript transcript) {
+		this.transcript = transcript;
+	}
+
 	@Override
 	public String toString() {
 		return String.format(
 				"Student{studentId=%d, studentNumber=%s, firstName=%s, middleName=%s, "
-						+ "lastName=%s, cgpa=%s, dateOfEnrollment=%s}",
+						+ "lastName=%s, cgpa=%s, dateOfEnrollment=%s, transcript=%s}",
 				studentId, studentNumber, firstName, middleName, lastName, cgpa,
-				dateOfEnrollment);
+				dateOfEnrollment, transcript);
 	}
 }

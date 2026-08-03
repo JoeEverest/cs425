@@ -7,6 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import edu.mum.cs.cs425.studentmgmt.model.Student;
+import edu.mum.cs.cs425.studentmgmt.model.Transcript;
 import edu.mum.cs.cs425.studentmgmt.repository.StudentRepository;
 
 
@@ -35,10 +36,14 @@ public class StudentMgmtApp implements CommandLineRunner {
 		Student s1 = new Student(1L, "000-61-0001", "Anna", "Lynn", "Smith",
 				3.45, LocalDate.of(2019, 5, 24));
 
-		// Save it to the database.
+		// Task 2.1: create the Transcript and link it to the Student (One-to-One).
+		Transcript t1 = new Transcript(1L, "BS Computer Science");
+		s1.setTranscript(t1);
+
+		// Save the student; CascadeType.ALL saves the linked transcript too.
 		saveStudent(s1);
 
-		System.out.println("Saved student to the database:");
+		System.out.println("Saved student (with transcript) to the database:");
 		System.out.println("  " + s1);
 	}
 }
