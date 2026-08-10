@@ -1,0 +1,16 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: lab9-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: eregistrar
+      MYSQL_USER: eregistrar
+      MYSQL_PASSWORD: eregistrar
+    ports:
+      - "3308:3306"
+    volumes:
+      - lab9-mysql-data:/var/lib/mysql
+
+volumes:
+  lab9-mysql-data:

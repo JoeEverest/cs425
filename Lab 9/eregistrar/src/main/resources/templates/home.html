@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eRegistrar - Home</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.2/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="/eregistrar/home">eRegistrar</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="/eregistrar/home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/eregistrar/student/list">List of Students</a></li>
+                <li class="nav-item"><a class="nav-link" href="/eregistrar/student/new">Register New Student</a></li>
+            </ul>
+            <form class="form-inline" action="/eregistrar/student/search" method="get">
+                <input class="form-control mr-sm-2" type="search" name="keyword" placeholder="Search students">
+                <button class="btn btn-light my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="jumbotron">
+            <h1 class="display-4">Welcome to eRegistrar</h1>
+            <p class="lead">The online Student Registration system for the University.</p>
+            <hr class="my-4">
+            <p>Use the navigation bar above to register new students, view the list of
+               registered students, edit a student's data, or delete a record.</p>
+            <a class="btn btn-primary btn-lg" href="/eregistrar/student/list" role="button">View Students</a>
+            <a class="btn btn-success btn-lg" href="/eregistrar/student/new" role="button">Register a Student</a>
+        </div>
+    </div>
+</body>
+</html>

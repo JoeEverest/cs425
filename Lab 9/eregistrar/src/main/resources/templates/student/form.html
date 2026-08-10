@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${mode == 'edit'} ? 'eRegistrar - Edit Student' : 'eRegistrar - Register Student'">eRegistrar - Student</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.2/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="/eregistrar/home">eRegistrar</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="/eregistrar/home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/eregistrar/student/list">List of Students</a></li>
+                <li class="nav-item"><a class="nav-link" href="/eregistrar/student/new">Register New Student</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h2 th:text="${mode == 'edit'} ? 'Edit Student Registration' : 'Register a New Student'">Student</h2>
+
+        <form th:action="@{/eregistrar/student/save}" th:object="${student}" method="post">
+            <!-- Carries the id on edit so save() performs an update. -->
+            <input type="hidden" th:field="*{studentId}"/>
+
+            <div class="form-group">
+                <label>Student Number</label>
+                <input type="text" class="form-control" th:field="*{studentNumber}" placeholder="e.g. 000-61-0001"/>
+                <small class="text-danger" th:if="${#fields.hasErrors('studentNumber')}" th:errors="*{studentNumber}"></small>
+            </div>
+
+            <div class="form-group">
+                <label>First Name</label>
+                <input type="text" class="form-control" th:field="*{firstName}"/>
+                <small class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></small>
+            </div>
+
+            <div class="form-group">
+                <label>Middle Name <span class="text-muted">(optional)</span></label>
+                <input type="text" class="form-control" th:field="*{middleName}"/>
+            </div>
+
+            <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" class="form-control" th:field="*{lastName}"/>
+                <small class="text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></small>
+            </div>
+
+            <div class="form-group">
+                <label>CGPA <span class="text-muted">(optional)</span></label>
+                <input type="number" step="0.01" class="form-control" th:field="*{cgpa}" placeholder="e.g. 3.78"/>
+            </div>
+
+            <div class="form-group">
+                <label>Enrollment Date</label>
+                <input type="date" class="form-control" th:field="*{enrollmentDate}"/>
+                <small class="text-danger" th:if="${#fields.hasErrors('enrollmentDate')}" th:errors="*{enrollmentDate}"></small>
+            </div>
+
+            <div class="form-group">
+                <label>International Student?</label>
+                <select class="form-control" th:field="*{isInternational}">
+                    <option value="">-- Select --</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+                <small class="text-danger" th:if="${#fields.hasErrors('isInternational')}" th:errors="*{isInternational}"></small>
+            </div>
+
+            <button type="submit" class="btn btn-primary" th:text="${mode == 'edit'} ? 'Update Student' : 'Save Student'">Save</button>
+            <a class="btn btn-secondary" href="/eregistrar/student/list">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>
